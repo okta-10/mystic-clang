@@ -1393,6 +1393,15 @@ set_target_properties(llvm-symbolizer PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS llvm-symbolizer )
 list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-symbolizer "${_IMPORT_PREFIX}/bin/llvm-symbolizer" )
 
+# Import target "llvm-tapi-diff" for configuration "Release"
+set_property(TARGET llvm-tapi-diff APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(llvm-tapi-diff PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/llvm-tapi-diff"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS llvm-tapi-diff )
+list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-tapi-diff "${_IMPORT_PREFIX}/bin/llvm-tapi-diff" )
+
 # Import target "llvm-undname" for configuration "Release"
 set_property(TARGET llvm-undname APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(llvm-undname PROPERTIES

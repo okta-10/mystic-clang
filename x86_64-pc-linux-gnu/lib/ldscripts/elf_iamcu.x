@@ -7,7 +7,7 @@ OUTPUT_FORMAT("elf32-iamcu", "elf32-iamcu",
 	      "elf32-iamcu")
 OUTPUT_ARCH(iamcu)
 ENTRY(_start)
-SEARCH_DIR("/home/okta-10/clang/install/x86_64-pc-linux-gnu/lib");
+SEARCH_DIR("/home/okta10/Android/build-toolchain/install/x86_64-pc-linux-gnu/lib");
 SECTIONS
 {
   /* Read-only sections, merged into text segment: */

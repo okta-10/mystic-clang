@@ -11,6 +11,8 @@
     addressofreturnaddress,                    // llvm.addressofreturnaddress
     adjust_trampoline,                         // llvm.adjust.trampoline
     annotation,                                // llvm.annotation
+    arithmetic_fence,                          // llvm.arithmetic.fence
+    asan_check_memaccess,                      // llvm.asan.check.memaccess
     assume,                                    // llvm.assume
     bitreverse,                                // llvm.bitreverse
     bswap,                                     // llvm.bswap
@@ -31,6 +33,7 @@
     coro_async_context_alloc,                  // llvm.coro.async.context.alloc
     coro_async_context_dealloc,                // llvm.coro.async.context.dealloc
     coro_async_resume,                         // llvm.coro.async.resume
+    coro_async_size_replace,                   // llvm.coro.async.size.replace
     coro_begin,                                // llvm.coro.begin
     coro_destroy,                              // llvm.coro.destroy
     coro_done,                                 // llvm.coro.done
@@ -123,15 +126,21 @@
     experimental_constrained_trunc,            // llvm.experimental.constrained.trunc
     experimental_constrained_uitofp,           // llvm.experimental.constrained.uitofp
     experimental_deoptimize,                   // llvm.experimental.deoptimize
+    experimental_gc_get_pointer_base,          // llvm.experimental.gc.get.pointer.base
+    experimental_gc_get_pointer_offset,        // llvm.experimental.gc.get.pointer.offset
     experimental_gc_relocate,                  // llvm.experimental.gc.relocate
     experimental_gc_result,                    // llvm.experimental.gc.result
     experimental_gc_statepoint,                // llvm.experimental.gc.statepoint
     experimental_guard,                        // llvm.experimental.guard
+    experimental_noalias_scope_decl,           // llvm.experimental.noalias.scope.decl
     experimental_patchpoint_i64,               // llvm.experimental.patchpoint.i64
     experimental_patchpoint_void,              // llvm.experimental.patchpoint.void
     experimental_stackmap,                     // llvm.experimental.stackmap
+    experimental_stepvector,                   // llvm.experimental.stepvector
     experimental_vector_extract,               // llvm.experimental.vector.extract
     experimental_vector_insert,                // llvm.experimental.vector.insert
+    experimental_vector_reverse,               // llvm.experimental.vector.reverse
+    experimental_vector_splice,                // llvm.experimental.vector.splice
     experimental_widenable_condition,          // llvm.experimental.widenable.condition
     fabs,                                      // llvm.fabs
     floor,                                     // llvm.floor
@@ -204,6 +213,7 @@
     objc_autoreleasePoolPop,                   // llvm.objc.autoreleasePoolPop
     objc_autoreleasePoolPush,                  // llvm.objc.autoreleasePoolPush
     objc_autoreleaseReturnValue,               // llvm.objc.autoreleaseReturnValue
+    objc_clang_arc_noop_use,                   // llvm.objc.clang.arc.noop.use
     objc_clang_arc_use,                        // llvm.objc.clang.arc.use
     objc_copyWeak,                             // llvm.objc.copyWeak
     objc_destroyWeak,                          // llvm.objc.destroyWeak
@@ -248,7 +258,12 @@
     sadd_with_overflow,                        // llvm.sadd.with.overflow
     sdiv_fix,                                  // llvm.sdiv.fix
     sdiv_fix_sat,                              // llvm.sdiv.fix.sat
+    seh_scope_begin,                           // llvm.seh.scope.begin
+    seh_scope_end,                             // llvm.seh.scope.end
+    seh_try_begin,                             // llvm.seh.try.begin
+    seh_try_end,                               // llvm.seh.try.end
     set_loop_iterations,                       // llvm.set.loop.iterations
+    set_rounding,                              // llvm.set.rounding
     sideeffect,                                // llvm.sideeffect
     sin,                                       // llvm.sin
     smax,                                      // llvm.smax
@@ -268,7 +283,9 @@
     stacksave,                                 // llvm.stacksave
     start_loop_iterations,                     // llvm.start.loop.iterations
     strip_invariant_group,                     // llvm.strip.invariant.group
+    swift_async_context_addr,                  // llvm.swift.async.context.addr
     test_set_loop_iterations,                  // llvm.test.set.loop.iterations
+    test_start_loop_iterations,                // llvm.test.start.loop.iterations
     thread_pointer,                            // llvm.thread.pointer
     trap,                                      // llvm.trap
     trunc,                                     // llvm.trunc
@@ -307,12 +324,35 @@
     vp_add,                                    // llvm.vp.add
     vp_and,                                    // llvm.vp.and
     vp_ashr,                                   // llvm.vp.ashr
+    vp_fadd,                                   // llvm.vp.fadd
+    vp_fdiv,                                   // llvm.vp.fdiv
+    vp_fmul,                                   // llvm.vp.fmul
+    vp_frem,                                   // llvm.vp.frem
+    vp_fsub,                                   // llvm.vp.fsub
+    vp_gather,                                 // llvm.vp.gather
+    vp_load,                                   // llvm.vp.load
     vp_lshr,                                   // llvm.vp.lshr
     vp_mul,                                    // llvm.vp.mul
     vp_or,                                     // llvm.vp.or
+    vp_reduce_add,                             // llvm.vp.reduce.add
+    vp_reduce_and,                             // llvm.vp.reduce.and
+    vp_reduce_fadd,                            // llvm.vp.reduce.fadd
+    vp_reduce_fmax,                            // llvm.vp.reduce.fmax
+    vp_reduce_fmin,                            // llvm.vp.reduce.fmin
+    vp_reduce_fmul,                            // llvm.vp.reduce.fmul
+    vp_reduce_mul,                             // llvm.vp.reduce.mul
+    vp_reduce_or,                              // llvm.vp.reduce.or
+    vp_reduce_smax,                            // llvm.vp.reduce.smax
+    vp_reduce_smin,                            // llvm.vp.reduce.smin
+    vp_reduce_umax,                            // llvm.vp.reduce.umax
+    vp_reduce_umin,                            // llvm.vp.reduce.umin
+    vp_reduce_xor,                             // llvm.vp.reduce.xor
+    vp_scatter,                                // llvm.vp.scatter
     vp_sdiv,                                   // llvm.vp.sdiv
+    vp_select,                                 // llvm.vp.select
     vp_shl,                                    // llvm.vp.shl
     vp_srem,                                   // llvm.vp.srem
+    vp_store,                                  // llvm.vp.store
     vp_sub,                                    // llvm.vp.sub
     vp_udiv,                                   // llvm.vp.udiv
     vp_urem,                                   // llvm.vp.urem
@@ -321,4 +361,4 @@
     write_register,                            // llvm.write_register
     xray_customevent,                          // llvm.xray.customevent
     xray_typedevent,                           // llvm.xray.typedevent
-    num_intrinsics = 9759
+    num_intrinsics = 10528

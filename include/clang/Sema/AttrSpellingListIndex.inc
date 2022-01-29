@@ -326,12 +326,30 @@
         return 2;
     break;
   }
+  case AT_BTFTag: {
+    if (Name == "btf_tag" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "btf_tag" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    if (Name == "btf_tag" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 2;
+    break;
+  }
   case AT_Blocks: {
     if (Name == "blocks" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
         return 0;
     if (Name == "blocks" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
         return 1;
     if (Name == "blocks" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_BuiltinAlias: {
+    if (Name == "builtin_alias" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 0;
+    if (Name == "builtin_alias" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 1;
+    if (Name == "clang_builtin_alias" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
         return 2;
     break;
   }
@@ -698,6 +716,15 @@
         return 0;
     break;
   }
+  case AT_DisableSanitizerInstrumentation: {
+    if (Name == "disable_sanitizer_instrumentation" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "disable_sanitizer_instrumentation" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    if (Name == "disable_sanitizer_instrumentation" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 2;
+    break;
+  }
   case AT_DisableTailCalls: {
     if (Name == "disable_tail_calls" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
         return 0;
@@ -742,6 +769,21 @@
         return 1;
     if (Name == "enum_extensibility" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
         return 2;
+    break;
+  }
+  case AT_Error: {
+    if (Name == "error" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "error" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "gnu")
+        return 1;
+    if (Name == "error" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "gnu")
+        return 2;
+    if (Name == "warning" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 3;
+    if (Name == "warning" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "gnu")
+        return 4;
+    if (Name == "warning" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "gnu")
+        return 5;
     break;
   }
   case AT_ExcludeFromExplicitInstantiation: {
@@ -854,6 +896,13 @@
     if (Name == "guarded_var" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
         return 0;
     if (Name == "guarded_var" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    break;
+  }
+  case AT_HIPManaged: {
+    if (Name == "managed" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "__managed__" && getSyntax() == AttributeCommonInfo::AS_Declspec && Scope == "")
         return 1;
     break;
   }
@@ -1140,6 +1189,15 @@
         return 2;
     break;
   }
+  case AT_MustTail: {
+    if (Name == "musttail" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "musttail" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    if (Name == "musttail" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 2;
+    break;
+  }
   case AT_NSConsumed: {
     if (Name == "ns_consumed" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
         return 0;
@@ -1329,6 +1387,15 @@
     if (Name == "nomips16" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "gnu")
         return 1;
     if (Name == "nomips16" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "gnu")
+        return 2;
+    break;
+  }
+  case AT_NoProfileFunction: {
+    if (Name == "no_profile_instrument_function" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "no_profile_instrument_function" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "gnu")
+        return 1;
+    if (Name == "no_profile_instrument_function" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "gnu")
         return 2;
     break;
   }
@@ -2144,6 +2211,15 @@
         return 3;
     break;
   }
+  case AT_Retain: {
+    if (Name == "retain" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "retain" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "gnu")
+        return 1;
+    if (Name == "retain" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "gnu")
+        return 2;
+    break;
+  }
   case AT_ReturnTypestate: {
     if (Name == "return_typestate" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
         return 0;
@@ -2242,6 +2318,13 @@
         return 2;
     break;
   }
+  case AT_StandaloneDebug: {
+    if (Name == "standalone_debug" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "standalone_debug" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    break;
+  }
   case AT_StdCall: {
     if (Name == "stdcall" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
         return 0;
@@ -2269,6 +2352,33 @@
     if (Name == "swift_async" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
         return 1;
     if (Name == "swift_async" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_SwiftAsyncCall: {
+    if (Name == "swiftasynccall" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "swiftasynccall" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    if (Name == "swiftasynccall" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_SwiftAsyncContext: {
+    if (Name == "swift_async_context" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "swift_async_context" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    if (Name == "swift_async_context" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_SwiftAsyncError: {
+    if (Name == "swift_async_error" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "swift_async_error" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
+    if (Name == "swift_async_error" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "clang")
         return 2;
     break;
   }
@@ -2529,6 +2639,13 @@
         return 1;
     if (Name == "used" && getSyntax() == AttributeCommonInfo::AS_C2x && Scope == "gnu")
         return 2;
+    break;
+  }
+  case AT_UsingIfExists: {
+    if (Name == "using_if_exists" && getSyntax() == AttributeCommonInfo::AS_GNU && Scope == "")
+        return 0;
+    if (Name == "using_if_exists" && getSyntax() == AttributeCommonInfo::AS_CXX11 && Scope == "clang")
+        return 1;
     break;
   }
   case AT_Uuid: {

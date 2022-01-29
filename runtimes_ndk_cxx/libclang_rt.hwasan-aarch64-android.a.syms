@@ -5,7 +5,6 @@
   __interceptor_aligned_alloc;
   __interceptor_calloc;
   __interceptor_cfree;
-  __interceptor_fork;
   __interceptor_free;
   __interceptor_longjmp;
   __interceptor_mallinfo;
@@ -96,7 +95,6 @@
   aligned_alloc;
   calloc;
   cfree;
-  fork;
   free;
   longjmp;
   mallinfo;

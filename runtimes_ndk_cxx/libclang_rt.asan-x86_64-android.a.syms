@@ -145,6 +145,7 @@
   __interceptor_pthread_attr_getstacksize;
   __interceptor_pthread_condattr_getpshared;
   __interceptor_pthread_create;
+  __interceptor_pthread_getcpuclockid;
   __interceptor_pthread_getschedparam;
   __interceptor_pthread_join;
   __interceptor_pthread_mutex_lock;
@@ -184,9 +185,11 @@
   __interceptor_sem_destroy;
   __interceptor_sem_getvalue;
   __interceptor_sem_init;
+  __interceptor_sem_open;
   __interceptor_sem_post;
   __interceptor_sem_timedwait;
   __interceptor_sem_trywait;
+  __interceptor_sem_unlink;
   __interceptor_sem_wait;
   __interceptor_send;
   __interceptor_sendmmsg;
@@ -361,6 +364,7 @@
   __sanitizer_syscall_post_impl_epoll_create1;
   __sanitizer_syscall_post_impl_epoll_ctl;
   __sanitizer_syscall_post_impl_epoll_pwait;
+  __sanitizer_syscall_post_impl_epoll_pwait2;
   __sanitizer_syscall_post_impl_epoll_wait;
   __sanitizer_syscall_post_impl_eventfd;
   __sanitizer_syscall_post_impl_eventfd2;
@@ -669,6 +673,7 @@
   __sanitizer_syscall_pre_impl_epoll_create1;
   __sanitizer_syscall_pre_impl_epoll_ctl;
   __sanitizer_syscall_pre_impl_epoll_pwait;
+  __sanitizer_syscall_pre_impl_epoll_pwait2;
   __sanitizer_syscall_pre_impl_epoll_wait;
   __sanitizer_syscall_pre_impl_eventfd;
   __sanitizer_syscall_pre_impl_eventfd2;
@@ -1098,6 +1103,7 @@
   pthread_attr_getstacksize;
   pthread_condattr_getpshared;
   pthread_create;
+  pthread_getcpuclockid;
   pthread_getschedparam;
   pthread_join;
   pthread_mutex_lock;
@@ -1136,9 +1142,11 @@
   sem_destroy;
   sem_getvalue;
   sem_init;
+  sem_open;
   sem_post;
   sem_timedwait;
   sem_trywait;
+  sem_unlink;
   sem_wait;
   send;
   sendmmsg;

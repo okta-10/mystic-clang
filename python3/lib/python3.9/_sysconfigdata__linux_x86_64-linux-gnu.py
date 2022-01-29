@@ -10,11 +10,13 @@ build_time_vars = {'ABIFLAGS': '',
  'BASECFLAGS': '-Wno-unused-result -Wsign-compare',
  'BASECPPFLAGS': '-IObjects -IInclude -IPython',
  'BASEMODLIBS': '',
- 'BINDIR': '/tmpfs/src/out/install/bin',
- 'BINLIBDEST': '/tmpfs/src/out/install/lib/python3.9',
+ 'BINDIR': '/tmpfs/src/git/out/python3/install/bin',
+ 'BINLIBDEST': '/tmpfs/src/git/out/python3/install/lib/python3.9',
  'BLDLIBRARY': '-L. -lpython3.9',
  'BLDSHARED': 'gcc -pthread -shared -Wno-unused-command-line-argument -s '
-              "-Wl,-rpath,'$ORIGIN/../lib'",
+              '-Wl,-rpath,\\$ORIGIN/../lib -Wl,--as-needed  '
+              '-L/tmpfs/src/git/out/libffi/install/lib64 '
+              '-Wl,--exclude-libs=libffi.a',
  'BUILDEXE': '',
  'BUILDPYTHON': 'python',
  'BUILD_GNU_TYPE': 'x86_64-pc-linux-gnu',
@@ -36,28 +38,34 @@ build_time_vars = {'ABIFLAGS': '',
                             '-fvisibility=hidden',
  'CONFIGURE_CPPFLAGS': '',
  'CONFIGURE_LDFLAGS': '-Wno-unused-command-line-argument -s '
-                      "-Wl,-rpath,'$ORIGIN/../lib'",
+                      '-Wl,-rpath,\\$ORIGIN/../lib -Wl,--as-needed  '
+                      '-L/tmpfs/src/git/out/libffi/install/lib64 '
+                      '-Wl,--exclude-libs=libffi.a',
  'CONFIGURE_LDFLAGS_NODIST': '',
- 'CONFIG_ARGS': "'--prefix=/tmpfs/src/out/install' '--enable-shared' "
-                "'CFLAGS=-Wno-unused-command-line-argument' "
+ 'CONFIG_ARGS': "'--prefix=/tmpfs/src/git/out/python3/install' "
+                "'--enable-shared' 'CFLAGS=-Wno-unused-command-line-argument' "
                 "'LDFLAGS=-Wno-unused-command-line-argument -s "
-                "-Wl,-rpath,'\\''$ORIGIN/../lib'\\'''",
- 'CONFINCLUDEDIR': '/tmpfs/src/out/install/include',
- 'CONFINCLUDEPY': '/tmpfs/src/out/install/include/python3.9',
+                '-Wl,-rpath,\\$ORIGIN/../lib -Wl,--as-needed  '
+                '-L/tmpfs/src/git/out/libffi/install/lib64 '
+                "-Wl,--exclude-libs=libffi.a' "
+                "'PKG_CONFIG_PATH=/tmpfs/src/git/out/libffi/install/lib/pkgconfig'",
+ 'CONFINCLUDEDIR': '/tmpfs/src/git/out/python3/install/include',
+ 'CONFINCLUDEPY': '/tmpfs/src/git/out/python3/install/include/python3.9',
  'COREPYTHONPATH': '',
- 'COVERAGE_INFO': '/tmpfs/src/out/build/coverage.info',
- 'COVERAGE_REPORT': '/tmpfs/src/out/build/lcov-report',
+ 'COVERAGE_INFO': '/tmpfs/src/git/out/python3/build/coverage.info',
+ 'COVERAGE_REPORT': '/tmpfs/src/git/out/python3/build/lcov-report',
  'COVERAGE_REPORT_OPTIONS': '--no-branch-coverage --title "CPython lcov '
                             'report"',
  'CPPFLAGS': '-IObjects -IInclude -IPython -I. '
-             '-I/tmpfs/src/git/cpython3/Include',
- 'CXX': 'g++ -pthread',
- 'DESTDIRS': '/tmpfs/src/out/install /tmpfs/src/out/install/lib '
-             '/tmpfs/src/out/install/lib/python3.9 '
-             '/tmpfs/src/out/install/lib/python3.9/lib-dynload',
- 'DESTLIB': '/tmpfs/src/out/install/lib/python3.9',
+             '-I/tmpfs/src/git/external/python/cpython3/Include',
+ 'CXX': 'g++',
+ 'DESTDIRS': '/tmpfs/src/git/out/python3/install '
+             '/tmpfs/src/git/out/python3/install/lib '
+             '/tmpfs/src/git/out/python3/install/lib/python3.9 '
+             '/tmpfs/src/git/out/python3/install/lib/python3.9/lib-dynload',
+ 'DESTLIB': '/tmpfs/src/git/out/python3/install/lib/python3.9',
  'DESTPATH': '',
- 'DESTSHARED': '/tmpfs/src/out/install/lib/python3.9/lib-dynload',
+ 'DESTSHARED': '/tmpfs/src/git/out/python3/install/lib/python3.9/lib-dynload',
  'DFLAGS': '',
  'DIRMODE': 755,
  'DIST': 'README.rst ChangeLog configure configure.ac acconfig.h pyconfig.h.in '
@@ -88,12 +96,9 @@ build_time_vars = {'ABIFLAGS': '',
  'FLOAT_WORDS_BIGENDIAN': 0,
  'FLOCK_NEEDS_LIBBSD': 0,
  'GETPGRP_HAVE_ARG': 0,
- 'GITBRANCH': 'git --git-dir /tmpfs/src/git/cpython3/.git name-rev --name-only '
-              'HEAD',
- 'GITTAG': 'git --git-dir /tmpfs/src/git/cpython3/.git describe --all --always '
-           '--dirty',
- 'GITVERSION': 'git --git-dir /tmpfs/src/git/cpython3/.git rev-parse --short '
-               'HEAD',
+ 'GITBRANCH': '',
+ 'GITTAG': '',
+ 'GITVERSION': '',
  'GNULD': 'yes',
  'HAVE_ACCEPT4': 1,
  'HAVE_ACOSH': 1,
@@ -273,7 +278,7 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_LIBDLD': 0,
  'HAVE_LIBIEEE': 0,
  'HAVE_LIBINTL_H': 1,
- 'HAVE_LIBREADLINE': 1,
+ 'HAVE_LIBREADLINE': 0,
  'HAVE_LIBRESOLV': 0,
  'HAVE_LIBSENDFILE': 0,
  'HAVE_LIBUTIL_H': 0,
@@ -351,14 +356,14 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_READV': 1,
  'HAVE_REALPATH': 1,
  'HAVE_RENAMEAT': 1,
- 'HAVE_RL_APPEND_HISTORY': 1,
- 'HAVE_RL_CATCH_SIGNAL': 1,
- 'HAVE_RL_COMPLETION_APPEND_CHARACTER': 1,
- 'HAVE_RL_COMPLETION_DISPLAY_MATCHES_HOOK': 1,
- 'HAVE_RL_COMPLETION_MATCHES': 1,
- 'HAVE_RL_COMPLETION_SUPPRESS_APPEND': 1,
- 'HAVE_RL_PRE_INPUT_HOOK': 1,
- 'HAVE_RL_RESIZE_TERMINAL': 1,
+ 'HAVE_RL_APPEND_HISTORY': 0,
+ 'HAVE_RL_CATCH_SIGNAL': 0,
+ 'HAVE_RL_COMPLETION_APPEND_CHARACTER': 0,
+ 'HAVE_RL_COMPLETION_DISPLAY_MATCHES_HOOK': 0,
+ 'HAVE_RL_COMPLETION_MATCHES': 0,
+ 'HAVE_RL_COMPLETION_SUPPRESS_APPEND': 0,
+ 'HAVE_RL_PRE_INPUT_HOOK': 0,
+ 'HAVE_RL_RESIZE_TERMINAL': 0,
  'HAVE_ROUND': 1,
  'HAVE_RTPSPAWN': 0,
  'HAVE_SCHED_GET_PRIORITY_MAX': 1,
@@ -416,13 +421,13 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_STDARG_PROTOTYPES': 1,
  'HAVE_STDINT_H': 1,
  'HAVE_STDLIB_H': 1,
- 'HAVE_STD_ATOMIC': 1,
+ 'HAVE_STD_ATOMIC': 0,
  'HAVE_STRDUP': 1,
  'HAVE_STRFTIME': 1,
  'HAVE_STRINGS_H': 1,
  'HAVE_STRING_H': 1,
  'HAVE_STRLCPY': 0,
- 'HAVE_STROPTS_H': 1,
+ 'HAVE_STROPTS_H': 0,
  'HAVE_STRSIGNAL': 1,
  'HAVE_STRUCT_PASSWD_PW_GECOS': 1,
  'HAVE_STRUCT_PASSWD_PW_PASSWD': 1,
@@ -515,16 +520,16 @@ build_time_vars = {'ABIFLAGS': '',
  'HAVE_WMEMCMP': 1,
  'HAVE_WORKING_TZSET': 1,
  'HAVE_WRITEV': 1,
- 'HAVE_X509_VERIFY_PARAM_SET1_HOST': 1,
+ 'HAVE_X509_VERIFY_PARAM_SET1_HOST': 0,
  'HAVE_ZLIB_COPY': 1,
  'HAVE__GETPTY': 0,
  'HOST_GNU_TYPE': 'x86_64-pc-linux-gnu',
- 'INCLDIRSTOMAKE': '/tmpfs/src/out/install/include '
-                   '/tmpfs/src/out/install/include '
-                   '/tmpfs/src/out/install/include/python3.9 '
-                   '/tmpfs/src/out/install/include/python3.9',
- 'INCLUDEDIR': '/tmpfs/src/out/install/include',
- 'INCLUDEPY': '/tmpfs/src/out/install/include/python3.9',
+ 'INCLDIRSTOMAKE': '/tmpfs/src/git/out/python3/install/include '
+                   '/tmpfs/src/git/out/python3/install/include '
+                   '/tmpfs/src/git/out/python3/install/include/python3.9 '
+                   '/tmpfs/src/git/out/python3/install/include/python3.9',
+ 'INCLUDEDIR': '/tmpfs/src/git/out/python3/install/include',
+ 'INCLUDEPY': '/tmpfs/src/git/out/python3/install/include/python3.9',
  'INSTALL': '/usr/bin/install -c',
  'INSTALL_DATA': '/usr/bin/install -c -m 644',
  'INSTALL_PROGRAM': '/usr/bin/install -c',
@@ -533,23 +538,27 @@ build_time_vars = {'ABIFLAGS': '',
  'INSTSONAME': 'libpython3.9.so.1.0',
  'IO_H': 'Modules/_io/_iomodule.h',
  'IO_OBJS': '\\',
- 'LDCXXSHARED': 'g++ -pthread -shared',
- 'LDFLAGS': "-Wno-unused-command-line-argument -s -Wl,-rpath,'$ORIGIN/../lib'",
+ 'LDCXXSHARED': 'g++ -shared',
+ 'LDFLAGS': '-Wno-unused-command-line-argument -s -Wl,-rpath,\\$ORIGIN/../lib '
+            '-Wl,--as-needed  -L/tmpfs/src/git/out/libffi/install/lib64 '
+            '-Wl,--exclude-libs=libffi.a',
  'LDFLAGS_NODIST': '',
  'LDLIBRARY': 'libpython3.9.so',
  'LDLIBRARYDIR': '',
  'LDSHARED': 'gcc -pthread -shared -Wno-unused-command-line-argument -s '
-             "-Wl,-rpath,'$ORIGIN/../lib'",
+             '-Wl,-rpath,\\$ORIGIN/../lib -Wl,--as-needed  '
+             '-L/tmpfs/src/git/out/libffi/install/lib64 '
+             '-Wl,--exclude-libs=libffi.a',
  'LDVERSION': '3.9',
  'LIBC': '',
- 'LIBDEST': '/tmpfs/src/out/install/lib/python3.9',
- 'LIBDIR': '/tmpfs/src/out/install/lib',
- 'LIBFFI_INCLUDEDIR': '',
+ 'LIBDEST': '/tmpfs/src/git/out/python3/install/lib/python3.9',
+ 'LIBDIR': '/tmpfs/src/git/out/python3/install/lib',
+ 'LIBFFI_INCLUDEDIR': '/tmpfs/src/git/out/libffi/install/include',
  'LIBM': '-lm',
  'LIBOBJDIR': 'Python/',
  'LIBOBJS': '',
- 'LIBPC': '/tmpfs/src/out/install/lib/pkgconfig',
- 'LIBPL': '/tmpfs/src/out/install/lib/python3.9/config-3.9-x86_64-linux-gnu',
+ 'LIBPC': '/tmpfs/src/git/out/python3/install/lib/pkgconfig',
+ 'LIBPL': '/tmpfs/src/git/out/python3/install/lib/python3.9/config-3.9-x86_64-linux-gnu',
  'LIBPYTHON': '',
  'LIBRARY': 'libpython3.9.a',
  'LIBRARY_OBJS': '\\',
@@ -566,14 +575,14 @@ build_time_vars = {'ABIFLAGS': '',
  'LOCALMODLIBS': '',
  'MACHDEP': 'linux',
  'MACHDEP_OBJS': '',
- 'MACHDESTLIB': '/tmpfs/src/out/install/lib/python3.9',
+ 'MACHDESTLIB': '/tmpfs/src/git/out/python3/install/lib/python3.9',
  'MACOSX_DEPLOYMENT_TARGET': '',
  'MAINCC': 'gcc -pthread',
  'MAJOR_IN_MKDEV': 0,
  'MAJOR_IN_SYSMACROS': 0,
- 'MAKESETUP': '/tmpfs/src/git/cpython3/Modules/makesetup',
- 'MANDIR': '/tmpfs/src/out/install/share/man',
- 'MKDIR_P': '/bin/mkdir -p',
+ 'MAKESETUP': '/tmpfs/src/git/external/python/cpython3/Modules/makesetup',
+ 'MANDIR': '/tmpfs/src/git/out/python3/install/share/man',
+ 'MKDIR_P': '/usr/bin/mkdir -p',
  'MODBUILT_NAMES': 'posix  errno  pwd  _sre  _codecs  _weakref  _functools  '
                    '_operator  _collections  _abc  itertools  atexit  _signal  '
                    '_stat  time  _thread  _locale  _io  faulthandler  '
@@ -600,7 +609,7 @@ build_time_vars = {'ABIFLAGS': '',
  'OBJECT_OBJS': '\\',
  'OPENSSL_INCLUDES': '',
  'OPENSSL_LDFLAGS': '',
- 'OPENSSL_LIBS': '-lssl -lcrypto',
+ 'OPENSSL_LIBS': '',
  'OPT': '-DNDEBUG -g -fwrapv -O3 -Wall',
  'OTHER_LIBTOOL_OPT': '',
  'PACKAGE_BUGREPORT': 0,
@@ -642,33 +651,38 @@ build_time_vars = {'ABIFLAGS': '',
                              '-Wno-missing-field-initializers '
                              '-Werror=implicit-function-declaration '
                              '-fvisibility=hidden  '
-                             '-I/tmpfs/src/git/cpython3/Include/internal '
+                             '-I/tmpfs/src/git/external/python/cpython3/Include/internal '
                              '-IObjects -IInclude -IPython -I. '
-                             '-I/tmpfs/src/git/cpython3/Include -fPIC '
-                             '-DPy_BUILD_CORE_BUILTIN',
+                             '-I/tmpfs/src/git/external/python/cpython3/Include '
+                             '-fPIC -DPy_BUILD_CORE_BUILTIN',
  'PY_CFLAGS': '-Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall '
               '-Wno-unused-command-line-argument',
  'PY_CFLAGS_NODIST': '-std=c99 -Wextra -Wno-unused-result '
                      '-Wno-unused-parameter -Wno-missing-field-initializers '
                      '-Werror=implicit-function-declaration '
                      '-fvisibility=hidden  '
-                     '-I/tmpfs/src/git/cpython3/Include/internal',
+                     '-I/tmpfs/src/git/external/python/cpython3/Include/internal',
  'PY_COERCE_C_LOCALE': 1,
  'PY_CORE_CFLAGS': '-Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 '
                    '-Wall -Wno-unused-command-line-argument -std=c99 -Wextra '
                    '-Wno-unused-result -Wno-unused-parameter '
                    '-Wno-missing-field-initializers '
                    '-Werror=implicit-function-declaration -fvisibility=hidden  '
-                   '-I/tmpfs/src/git/cpython3/Include/internal -IObjects '
-                   '-IInclude -IPython -I. -I/tmpfs/src/git/cpython3/Include '
-                   '-fPIC -DPy_BUILD_CORE',
+                   '-I/tmpfs/src/git/external/python/cpython3/Include/internal '
+                   '-IObjects -IInclude -IPython -I. '
+                   '-I/tmpfs/src/git/external/python/cpython3/Include -fPIC '
+                   '-DPy_BUILD_CORE',
  'PY_CORE_LDFLAGS': '-Wno-unused-command-line-argument -s '
-                    "-Wl,-rpath,'$ORIGIN/../lib'",
+                    '-Wl,-rpath,\\$ORIGIN/../lib -Wl,--as-needed  '
+                    '-L/tmpfs/src/git/out/libffi/install/lib64 '
+                    '-Wl,--exclude-libs=libffi.a',
  'PY_CPPFLAGS': '-IObjects -IInclude -IPython -I. '
-                '-I/tmpfs/src/git/cpython3/Include',
+                '-I/tmpfs/src/git/external/python/cpython3/Include',
  'PY_FORMAT_SIZE_T': '"z"',
  'PY_LDFLAGS': '-Wno-unused-command-line-argument -s '
-               "-Wl,-rpath,'$ORIGIN/../lib'",
+               '-Wl,-rpath,\\$ORIGIN/../lib -Wl,--as-needed  '
+               '-L/tmpfs/src/git/out/libffi/install/lib64 '
+               '-Wl,--exclude-libs=libffi.a',
  'PY_LDFLAGS_NODIST': '',
  'PY_SSL_DEFAULT_CIPHERS': 1,
  'PY_SSL_DEFAULT_CIPHER_STRING': 0,
@@ -678,9 +692,10 @@ build_time_vars = {'ABIFLAGS': '',
                         '-Wno-missing-field-initializers '
                         '-Werror=implicit-function-declaration '
                         '-fvisibility=hidden  '
-                        '-I/tmpfs/src/git/cpython3/Include/internal -IObjects '
-                        '-IInclude -IPython -I. '
-                        '-I/tmpfs/src/git/cpython3/Include -fPIC',
+                        '-I/tmpfs/src/git/external/python/cpython3/Include/internal '
+                        '-IObjects -IInclude -IPython -I. '
+                        '-I/tmpfs/src/git/external/python/cpython3/Include '
+                        '-fPIC',
  'Py_DEBUG': 0,
  'Py_ENABLE_SHARED': 1,
  'Py_HASH_ALGORITHM': 0,
@@ -689,8 +704,8 @@ build_time_vars = {'ABIFLAGS': '',
  'READELF': 'readelf',
  'RESSRCDIR': 'Mac/Resources/framework',
  'RETSIGTYPE': 'void',
- 'RUNSHARED': 'LD_LIBRARY_PATH=/tmpfs/src/out/build:/usr/local/tensorrt/lib',
- 'SCRIPTDIR': '/tmpfs/src/out/install/lib',
+ 'RUNSHARED': 'LD_LIBRARY_PATH=/tmpfs/src/git/out/python3/build',
+ 'SCRIPTDIR': '/tmpfs/src/git/out/python3/install/lib',
  'SETPGRP_HAVE_ARG': 0,
  'SGI_ABI': '@SGI_ABI@',
  'SHELL': '/bin/sh',
@@ -719,7 +734,7 @@ build_time_vars = {'ABIFLAGS': '',
  'SIZEOF__BOOL': 1,
  'SOABI': 'cpython-39-x86_64-linux-gnu',
  'SRCDIRS': 'Parser Parser/pegen Objects Python Modules Modules/_io Programs',
- 'SRC_GDB_HOOKS': '/tmpfs/src/git/cpython3/Tools/gdb/libpython.py',
+ 'SRC_GDB_HOOKS': '/tmpfs/src/git/external/python/cpython3/Tools/gdb/libpython.py',
  'STDC_HEADERS': 1,
  'STRICT_SYSV_CURSES': "/* Don't use ncurses extensions */",
  'STRIPFLAG': '-s',
@@ -731,11 +746,10 @@ build_time_vars = {'ABIFLAGS': '',
  'TCLTK_LIBS': '',
  'TESTOPTS': '',
  'TESTPATH': '',
- 'TESTPYTHON': 'LD_LIBRARY_PATH=/tmpfs/src/out/build:/usr/local/tensorrt/lib '
-               './python',
+ 'TESTPYTHON': 'LD_LIBRARY_PATH=/tmpfs/src/git/out/python3/build ./python',
  'TESTPYTHONOPTS': '',
- 'TESTRUNNER': 'LD_LIBRARY_PATH=/tmpfs/src/out/build:/usr/local/tensorrt/lib '
-               './python /tmpfs/src/git/cpython3/Tools/scripts/run_tests.py',
+ 'TESTRUNNER': 'LD_LIBRARY_PATH=/tmpfs/src/git/out/python3/build ./python '
+               '/tmpfs/src/git/external/python/cpython3/Tools/scripts/run_tests.py',
  'TESTTIMEOUT': 1200,
  'TIMEMODULE_LIB': 0,
  'TIME_WITH_SYS_TIME': 1,
@@ -743,10 +757,11 @@ build_time_vars = {'ABIFLAGS': '',
  'TZPATH': '/usr/share/zoneinfo:/usr/lib/zoneinfo:/usr/share/lib/zoneinfo:/etc/zoneinfo',
  'UNICODE_DEPS': '\\',
  'UNIVERSALSDK': '',
- 'UPDATE_FILE': 'python3 /tmpfs/src/git/cpython3/Tools/scripts/update_file.py',
+ 'UPDATE_FILE': 'python3 '
+                '/tmpfs/src/git/external/python/cpython3/Tools/scripts/update_file.py',
  'USE_COMPUTED_GOTOS': 0,
  'VERSION': '3.9',
- 'VPATH': '/tmpfs/src/git/cpython3',
+ 'VPATH': '/tmpfs/src/git/external/python/cpython3',
  'WINDOW_HAS_FLAGS': 1,
  'WITH_DECIMAL_CONTEXTVAR': 1,
  'WITH_DOC_STRINGS': 1,
@@ -758,9 +773,9 @@ build_time_vars = {'ABIFLAGS': '',
  'WITH_VALGRIND': 0,
  'X87_DOUBLE_ROUNDING': 0,
  'XMLLIBSUBDIRS': 'xml xml/dom xml/etree xml/parsers xml/sax',
- 'abs_builddir': '/tmpfs/src/out/build',
- 'abs_srcdir': '/tmpfs/src/git/cpython3',
- 'datarootdir': '/tmpfs/src/out/install/share',
- 'exec_prefix': '/tmpfs/src/out/install',
- 'prefix': '/tmpfs/src/out/install',
- 'srcdir': '/tmpfs/src/git/cpython3'}
+ 'abs_builddir': '/tmpfs/src/git/out/python3/build',
+ 'abs_srcdir': '/tmpfs/src/git/external/python/cpython3',
+ 'datarootdir': '/tmpfs/src/git/out/python3/install/share',
+ 'exec_prefix': '/tmpfs/src/git/out/python3/install',
+ 'prefix': '/tmpfs/src/git/out/python3/install',
+ 'srcdir': '/tmpfs/src/git/external/python/cpython3'}

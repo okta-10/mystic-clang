@@ -16976,7 +16976,7 @@ case ARM::BI__builtin_arm_mve_vcreateq_f32: {
   Value *Val4 = EmitScalarExpr(E->getArg(1));
   Value *Val5 = Builder.CreateInsertElement(Val3, Val4, static_cast<uint64_t>(1));
   llvm::Type *Val6 = llvm::FixedVectorType::get(FloatTy, 4);
-  return Builder.CreateBitCast(Val5, Val6);
+  return ARMMVEVectorReinterpret(Builder, this, Val5, Val6);
 }
 case ARM::BI__builtin_arm_mve_vcreateq_f16: {
   llvm::Type *Val0 = llvm::FixedVectorType::get(Int64Ty, 2);
@@ -16986,7 +16986,7 @@ case ARM::BI__builtin_arm_mve_vcreateq_f16: {
   Value *Val4 = EmitScalarExpr(E->getArg(1));
   Value *Val5 = Builder.CreateInsertElement(Val3, Val4, static_cast<uint64_t>(1));
   llvm::Type *Val6 = llvm::FixedVectorType::get(HalfTy, 8);
-  return Builder.CreateBitCast(Val5, Val6);
+  return ARMMVEVectorReinterpret(Builder, this, Val5, Val6);
 }
 case ARM::BI__builtin_arm_mve_vcreateq_s16:
 case ARM::BI__builtin_arm_mve_vcreateq_u16: {
@@ -16997,7 +16997,7 @@ case ARM::BI__builtin_arm_mve_vcreateq_u16: {
   Value *Val4 = EmitScalarExpr(E->getArg(1));
   Value *Val5 = Builder.CreateInsertElement(Val3, Val4, static_cast<uint64_t>(1));
   llvm::Type *Val6 = llvm::FixedVectorType::get(Int16Ty, 8);
-  return Builder.CreateBitCast(Val5, Val6);
+  return ARMMVEVectorReinterpret(Builder, this, Val5, Val6);
 }
 case ARM::BI__builtin_arm_mve_vcreateq_s32:
 case ARM::BI__builtin_arm_mve_vcreateq_u32: {
@@ -17008,7 +17008,7 @@ case ARM::BI__builtin_arm_mve_vcreateq_u32: {
   Value *Val4 = EmitScalarExpr(E->getArg(1));
   Value *Val5 = Builder.CreateInsertElement(Val3, Val4, static_cast<uint64_t>(1));
   llvm::Type *Val6 = llvm::FixedVectorType::get(Int32Ty, 4);
-  return Builder.CreateBitCast(Val5, Val6);
+  return ARMMVEVectorReinterpret(Builder, this, Val5, Val6);
 }
 case ARM::BI__builtin_arm_mve_vcreateq_s64:
 case ARM::BI__builtin_arm_mve_vcreateq_u64: {
@@ -17019,7 +17019,7 @@ case ARM::BI__builtin_arm_mve_vcreateq_u64: {
   Value *Val4 = EmitScalarExpr(E->getArg(1));
   Value *Val5 = Builder.CreateInsertElement(Val3, Val4, static_cast<uint64_t>(1));
   llvm::Type *Val6 = llvm::FixedVectorType::get(Int64Ty, 2);
-  return Builder.CreateBitCast(Val5, Val6);
+  return ARMMVEVectorReinterpret(Builder, this, Val5, Val6);
 }
 case ARM::BI__builtin_arm_mve_vcreateq_s8:
 case ARM::BI__builtin_arm_mve_vcreateq_u8: {
@@ -17030,7 +17030,7 @@ case ARM::BI__builtin_arm_mve_vcreateq_u8: {
   Value *Val4 = EmitScalarExpr(E->getArg(1));
   Value *Val5 = Builder.CreateInsertElement(Val3, Val4, static_cast<uint64_t>(1));
   llvm::Type *Val6 = llvm::FixedVectorType::get(Int8Ty, 16);
-  return Builder.CreateBitCast(Val5, Val6);
+  return ARMMVEVectorReinterpret(Builder, this, Val5, Val6);
 }
 case ARM::BI__builtin_arm_mve_vmullbq_int_x_s32:
 case ARM::BI__builtin_arm_mve_vmullbq_int_x_u32:

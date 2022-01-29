@@ -13,6 +13,7 @@
 #ifndef LLVM_ADT_STRINGEXTRAS_H
 #define LLVM_ADT_STRINGEXTRAS_H
 
+#include "llvm/ADT/APSInt.h"
 #include "llvm/ADT/ArrayRef.h"
 #include "llvm/ADT/SmallString.h"
 #include "llvm/ADT/StringRef.h"
@@ -296,6 +297,17 @@ inline std::string itostr(int64_t X) {
     return utostr(static_cast<uint64_t>(X));
 }
 
+inline std::string toString(const APInt &I, unsigned Radix, bool Signed,
+                            bool formatAsCLiteral = false) {
+  SmallString<40> S;
+  I.toString(S, Radix, Signed, formatAsCLiteral);
+  return std::string(S.str());
+}
+
+inline std::string toString(const APSInt &I, unsigned Radix) {
+  return toString(I, Radix, I.isSigned());
+}
+
 /// StrInStrNoCase - Portable version of strcasestr.  Locates the first
 /// occurrence of string 's1' in string 's2', ignoring case.  Returns
 /// the offset of s2 in s1 or npos if s2 cannot be found.
@@ -470,9 +482,9 @@ inline std::string join_items(Sep Separator, Args &&... Items) {
 /// list from a loop like so:
 ///
 /// \code
-///   ListSeparator SD;
+///   ListSeparator LS;
 ///   for (auto &I : C)
-///     OS << SD << I.getName();
+///     OS << LS << I.getName();
 /// \end
 class ListSeparator {
   bool First = true;

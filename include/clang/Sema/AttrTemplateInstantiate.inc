@@ -254,8 +254,16 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<BPFPreserveAccessIndexAttr>(At);
       return A->clone(C);
     }
+    case attr::BTFTag: {
+      const auto *A = cast<BTFTagAttr>(At);
+      return A->clone(C);
+    }
     case attr::Blocks: {
       const auto *A = cast<BlocksAttr>(At);
+      return A->clone(C);
+    }
+    case attr::BuiltinAlias: {
+      const auto *A = cast<BuiltinAliasAttr>(At);
       return A->clone(C);
     }
     case attr::C11NoReturn: {
@@ -454,6 +462,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       }
       return new (C) DiagnoseIfAttr(C, *A, tempInstCond, A->getMessage(), A->getDiagnosticType(), A->getArgDependent(), A->getParent());
     }
+    case attr::DisableSanitizerInstrumentation: {
+      const auto *A = cast<DisableSanitizerInstrumentationAttr>(At);
+      return A->clone(C);
+    }
     case attr::DisableTailCalls: {
       const auto *A = cast<DisableTailCallsAttr>(At);
       return A->clone(C);
@@ -484,6 +496,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::EnumExtensibility: {
       const auto *A = cast<EnumExtensibilityAttr>(At);
+      return A->clone(C);
+    }
+    case attr::Error: {
+      const auto *A = cast<ErrorAttr>(At);
       return A->clone(C);
     }
     case attr::ExcludeFromExplicitInstantiation: {
@@ -565,6 +581,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::GuardedVar: {
       const auto *A = cast<GuardedVarAttr>(At);
+      return A->clone(C);
+    }
+    case attr::HIPManaged: {
+      const auto *A = cast<HIPManagedAttr>(At);
       return A->clone(C);
     }
     case attr::Hot: {
@@ -660,6 +680,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<LoopHintAttr>(At);
       return A->clone(C);
     }
+    case attr::M68kInterrupt: {
+      const auto *A = cast<M68kInterruptAttr>(At);
+      return A->clone(C);
+    }
     case attr::MIGServerRoutine: {
       const auto *A = cast<MIGServerRoutineAttr>(At);
       return A->clone(C);
@@ -730,6 +754,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::Mode: {
       const auto *A = cast<ModeAttr>(At);
+      return A->clone(C);
+    }
+    case attr::MustTail: {
+      const auto *A = cast<MustTailAttr>(At);
       return A->clone(C);
     }
     case attr::NSConsumed: {
@@ -810,6 +838,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::NoMips16: {
       const auto *A = cast<NoMips16Attr>(At);
+      return A->clone(C);
+    }
+    case attr::NoProfileFunction: {
+      const auto *A = cast<NoProfileFunctionAttr>(At);
       return A->clone(C);
     }
     case attr::NoReturn: {
@@ -1238,6 +1270,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<RestrictAttr>(At);
       return A->clone(C);
     }
+    case attr::Retain: {
+      const auto *A = cast<RetainAttr>(At);
+      return A->clone(C);
+    }
     case attr::ReturnTypestate: {
       const auto *A = cast<ReturnTypestateAttr>(At);
       return A->clone(C);
@@ -1307,6 +1343,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<SpeculativeLoadHardeningAttr>(At);
       return A->clone(C);
     }
+    case attr::StandaloneDebug: {
+      const auto *A = cast<StandaloneDebugAttr>(At);
+      return A->clone(C);
+    }
     case attr::StdCall: {
       const auto *A = cast<StdCallAttr>(At);
       return A->clone(C);
@@ -1321,6 +1361,18 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::SwiftAsync: {
       const auto *A = cast<SwiftAsyncAttr>(At);
+      return A->clone(C);
+    }
+    case attr::SwiftAsyncCall: {
+      const auto *A = cast<SwiftAsyncCallAttr>(At);
+      return A->clone(C);
+    }
+    case attr::SwiftAsyncContext: {
+      const auto *A = cast<SwiftAsyncContextAttr>(At);
+      return A->clone(C);
+    }
+    case attr::SwiftAsyncError: {
+      const auto *A = cast<SwiftAsyncErrorAttr>(At);
       return A->clone(C);
     }
     case attr::SwiftAsyncName: {
@@ -1481,6 +1533,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::Used: {
       const auto *A = cast<UsedAttr>(At);
+      return A->clone(C);
+    }
+    case attr::UsingIfExists: {
+      const auto *A = cast<UsingIfExistsAttr>(At);
       return A->clone(C);
     }
     case attr::Uuid: {
@@ -1683,7 +1739,13 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::BPFPreserveAccessIndex: {
       return nullptr;
     }
+    case attr::BTFTag: {
+      return nullptr;
+    }
     case attr::Blocks: {
+      return nullptr;
+    }
+    case attr::BuiltinAlias: {
       return nullptr;
     }
     case attr::C11NoReturn: {
@@ -1830,6 +1892,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::DiagnoseIf: {
       return nullptr;
     }
+    case attr::DisableSanitizerInstrumentation: {
+      return nullptr;
+    }
     case attr::DisableTailCalls: {
       return nullptr;
     }
@@ -1846,6 +1911,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::EnumExtensibility: {
+      return nullptr;
+    }
+    case attr::Error: {
       return nullptr;
     }
     case attr::ExcludeFromExplicitInstantiation: {
@@ -1886,6 +1954,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::GuardedVar: {
+      return nullptr;
+    }
+    case attr::HIPManaged: {
       return nullptr;
     }
     case attr::Hot: {
@@ -1942,6 +2013,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::LoopHint: {
       return nullptr;
     }
+    case attr::M68kInterrupt: {
+      return nullptr;
+    }
     case attr::MIGServerRoutine: {
       return nullptr;
     }
@@ -1994,6 +2068,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::Mode: {
+      return nullptr;
+    }
+    case attr::MustTail: {
       return nullptr;
     }
     case attr::NSConsumed: {
@@ -2054,6 +2131,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::NoMips16: {
+      return nullptr;
+    }
+    case attr::NoProfileFunction: {
       return nullptr;
     }
     case attr::NoReturn: {
@@ -2352,6 +2432,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::Restrict: {
       return nullptr;
     }
+    case attr::Retain: {
+      return nullptr;
+    }
     case attr::ReturnTypestate: {
       return nullptr;
     }
@@ -2388,6 +2471,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::SpeculativeLoadHardening: {
       return nullptr;
     }
+    case attr::StandaloneDebug: {
+      return nullptr;
+    }
     case attr::StdCall: {
       return nullptr;
     }
@@ -2398,6 +2484,15 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::SwiftAsync: {
+      return nullptr;
+    }
+    case attr::SwiftAsyncCall: {
+      return nullptr;
+    }
+    case attr::SwiftAsyncContext: {
+      return nullptr;
+    }
+    case attr::SwiftAsyncError: {
       return nullptr;
     }
     case attr::SwiftAsyncName: {
@@ -2503,6 +2598,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::Used: {
+      return nullptr;
+    }
+    case attr::UsingIfExists: {
       return nullptr;
     }
     case attr::Uuid: {

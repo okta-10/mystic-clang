@@ -238,6 +238,10 @@ public:
       case BuiltinType::ID: return ctx.ID##Ty;
 #include "clang/Basic/PPCTypes.def"
 
+#define RVV_TYPE(NAME, ID, SINGLETON_ID) \
+      case BuiltinType::ID: return ctx.SINGLETON_ID;
+#include "clang/Basic/RISCVVTypes.def"
+
 #define BUILTIN_TYPE(ID, SINGLETON_ID) \
       case BuiltinType::ID: return ctx.SINGLETON_ID;
 #include "clang/AST/BuiltinTypes.def"
